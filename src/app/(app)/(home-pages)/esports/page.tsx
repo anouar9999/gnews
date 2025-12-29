@@ -25,48 +25,31 @@ const EsportsPage: React.FC = async () => {
   return (
     <div className="relative min-h-screen bg-white">
       {/* Hero Banner */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-neutral-900 via-black to-neutral-900 px-4 py-8 md:py-12 lg:py-16">
-        {/* Background Effects */}
-        <div className="pointer-events-none absolute top-0 right-0 h-96 w-96 rounded-full bg-yellow-600/10 blur-[140px]" />
-        <div className="pointer-events-none absolute bottom-0 left-0 h-96 w-96 rounded-full bg-orange-600/10 blur-[140px]" />
+     
+   <section className="mx-auto mb-12 mt-10  px-4 sm:px-6 lg:px-8">
+        <div className="container text-center mx-auto">
+        
 
-        <div className="relative z-10 container">
-          <div className="w-full flex justify-between gap-8">
-           <div>
- {/* Title */}
-            <h1
-              style={myFont.style}
-              className="special-font mb-6 text-[1rem] leading-[0.9] font-black tracking-tight text-white uppercase md:text-[2rem] lg:text-[4rem]"
-            >
-              Esports
-            </h1>
+         
 
-            {/* Description */}
-            <p className="max-w-2xl text-lg leading-relaxed text-neutral-300 md:text-xl">
+          {/* Title */}
+          <h1
+            style={myFont.style}
+              className="text-red-600 special-font mb-2 text-[1rem] leading-[0.9] font-black tracking-tight  uppercase md:text-[1rem] lg:text-[4rem]"
+          >
+       Esports
+          </h1>
+ <p className="font-semibold text-md text-neutral-600 text-center">
               Follow the competitive gaming scene with tournament coverage, team updates, player profiles, and esports industry news.
             </p>
-           </div>
-
+          {/* Description and Stats */}
+          <div className="pb-4  border-neutral-200 border-b-2 ">
            
 
-            {/* Stats */}
-            <div className="mt-8 flex items-end justify-end gap-8">
-              <div>
-                <div className="text-3xl font-black text-yellow-600">{esportsPosts.length}</div>
-                <div className="text-sm text-neutral-400 uppercase tracking-wider">Articles</div>
-              </div>
-              <div className="h-12 w-[1px] bg-neutral-700" />
-              <div>
-                <div className="text-3xl font-black text-yellow-600">Live</div>
-                <div className="text-sm text-neutral-400 uppercase tracking-wider">Coverage</div>
-              </div>
-            </div>
+        
           </div>
         </div>
-
-        {/* Bottom Accent */}
       </section>
-
       {/* Posts Grid */}
       <section className="container  py-4 md:py-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">

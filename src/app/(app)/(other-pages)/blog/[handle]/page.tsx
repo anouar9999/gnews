@@ -47,7 +47,7 @@ export default async function Page({ params }: { params: Promise<{ handle: strin
             {category?.title}
           </BadgeButton>
           <h1
-            className="max-w-4xl text-3xl font-semibold text-neutral-900 md:text-4xl md:leading-[120%]! lg:text-4xl dark:text-neutral-100"
+            className="max-w-4xl text-5xl font-zentry text-neutral-900 md:text-6xl md:leading-[120%]! lg:text-6xl dark:text-neutral-100"
             title="Quiet ingenuity: 120,000 lunches and counting"
           >
             {title}
@@ -249,9 +249,9 @@ export default async function Page({ params }: { params: Promise<{ handle: strin
           <Image
             alt={title || ''}
             src={featuredImage?.src}
-            width={featuredImage?.width}
-            height={featuredImage?.height}
-            className="rounded-xl"
+            width={1260}
+            height={750}
+            className="rounded-xl   mx-auto object-cover"
           />
         )}
       </div>

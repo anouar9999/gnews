@@ -26,8 +26,8 @@ const GamingPage: React.FC = async () => {
   return (
     <div className="relative min-h-screen bg-white">
       {/* Hero Banner */}
-      <section className=" bg-gradient-to-br from-neutral-900 via-black to-neutral-900 px-4 py-8 md:py-12 lg:py-16">
-        <div className="container">
+      <section className="mx-auto mb-12 mt-10  px-4 sm:px-6 lg:px-8">
+        <div className="container text-center mx-auto">
         
 
          
@@ -35,18 +35,18 @@ const GamingPage: React.FC = async () => {
           {/* Title */}
           <h1
             style={myFont.style}
-              className="special-font mb-6 text-[1rem] leading-[0.9] font-black tracking-tight text-white uppercase md:text-[2rem] lg:text-[4rem]"
+              className="text-red-600 special-font mb-2 text-[1rem] leading-[0.9] font-black tracking-tight  uppercase md:text-[1rem] lg:text-[4rem]"
           >
             Gaming News
           </h1>
-
-          {/* Description and Stats */}
-          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-            <p className="max-w-2xl text-lg text-neutral-600">
+ <p className="font-semibold text-md text-neutral-600 text-center">
               Discover the latest gaming news, releases, updates, and industry insights from Morocco and around the world.
             </p>
+          {/* Description and Stats */}
+          <div className="pb-4  border-neutral-200 border-b-2 ">
+           
 
-            <div className="flex items-center gap-6">
+            {/* <div className="flex items-center gap-6">
               <div>
                 <div className="text-2xl font-black text-red-600">{gamingPosts.length}</div>
                 <div className="text-xs font-medium text-neutral-500 uppercase">Articles</div>
@@ -56,7 +56,7 @@ const GamingPage: React.FC = async () => {
                 <div className="text-2xl font-black text-red-600">Daily</div>
                 <div className="text-xs font-medium text-neutral-500 uppercase">Updates</div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

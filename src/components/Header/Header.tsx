@@ -143,7 +143,7 @@ const HeaderGNews: FC<HeaderGNewsProps> = ({ className }) => {
           <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.02)_1px,transparent_1px)] bg-[size:32px_32px]" />
 
           <div className="container relative">
-            <div className="flex items-center justify-between py-3 lg:py-5 px-4">
+            <div className="flex items-center justify-between py-2 lg:py-4 px-4">
               {/* Logo - Using Zentry Font */}
               <Link href="/" className="flex-shrink-0 group">
                 <div className="flex items-center gap-3">
@@ -167,16 +167,15 @@ const HeaderGNews: FC<HeaderGNewsProps> = ({ className }) => {
               </Link>
 
               {/* Desktop Navigation - Enhanced */}
-              <nav className="hidden lg:flex items-center gap-0.5">
+              <nav className="hidden lg:flex items-center ">
                 {categoryLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="relative px-4 py-2.5 text-xs    text-neutral-400 hover:text-white transition-all uppercase tracking-[0.15em] group overflow-hidden"
+                    className="relative px-5 py-2.5 text-[0.9rem] text-white font-bold hover:text-black transition-all uppercase  group overflow-hidden"
                   >
                     <span className="relative z-10">{link.name}</span>
                     <span className="absolute inset-0 bg-gradient-to-r from-red-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-600 transition-all duration-300 group-hover:w-full" />
                   </Link>
                 ))}
               </nav>
@@ -214,7 +213,7 @@ const HeaderGNews: FC<HeaderGNewsProps> = ({ className }) => {
       {searchOpen && (
         <>
           <div
-            className="fixed inset-0 bg-black/97 z-[60] backdrop-blur-xl"
+            className="fixed inset-0 bg-black/60 z-[60] backdrop-blur-xl"
             onClick={() => {
               setSearchOpen(false)
               setSearchQuery('')
@@ -254,7 +253,7 @@ const HeaderGNews: FC<HeaderGNewsProps> = ({ className }) => {
                   </form>
 
                   {/* Popular Searches */}
-                  <div className="relative border-t border-neutral-800 px-8 py-6">
+                  {/* <div className="relative border-t border-neutral-800 px-8 py-6">
                     <div className="text-[10px] font-black text-neutral-500 uppercase tracking-[0.2em] mb-4">
                       Recherches Populaires
                     </div>
@@ -272,7 +271,7 @@ const HeaderGNews: FC<HeaderGNewsProps> = ({ className }) => {
                         </button>
                       ))}
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
