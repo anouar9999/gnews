@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import Link from 'next/link'
 import { Article } from '../page'
 
 interface ArticleListProps {
@@ -128,120 +129,130 @@ const ArticleList: React.FC<ArticleListProps> = ({ articles, onEdit, onDelete })
             key={article.id}
             className="group relative flex flex-col overflow-hidden  border-2 border-neutral-200 bg-white shadow-md transition-all  hover:shadow-xl"
           >
-           
-
-            {/* Featured Image Placeholder */}
-            <div className="h-48 w-full bg-gradient-to-br from-neutral-100 to-neutral-200 relative">
-              {article.featuredImage ? (
-                <img src={article.featuredImage} alt={article.title} className="h-full w-full object-cover" />
-              ) : (
-                <div className="flex h-full items-center justify-center">
-                  <svg className="h-16 w-16 text-neutral-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                </div>
-              )}
-              {/* Status Badge Overlay */}
-              <div className="absolute right-4 top-4">
-                {getStatusBadge(article.status)}
-              </div>
-            </div>
-
-            {/* Card Content */}
-            <div className="flex flex-1 flex-col p-6">
-              {/* Category */}
-              <div className="mb-3 flex items-center gap-2">
-                <span className="inline-flex items-center rounded-full bg-red-100 px-3 py-1 text-xs font-bold uppercase tracking-wide text-red-700">
-                  {article.category}
-                </span>
-              </div>
-
-              {/* Title */}
-              <h3 className="mb-3 line-clamp-2 text-2xl font-samuel uppercase text-neutral-900 transition-colors ">
-                {article.title}
-              </h3>
-
-              {/* Excerpt */}
-              <p className="mb-4 line-clamp-3 flex-1 text-sm leading-relaxed text-neutral-600">
-                {article.excerpt}
-              </p>
-
-              {/* Tags */}
-              {article.tags.length > 0 && (
-                <div className="mb-4 flex flex-wrap gap-2">
-                  {article.tags.slice(0, 3).map((tag) => (
-                    <span
-                      key={tag}
-                      className="inline-flex items-center rounded-lg bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-700"
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                  {article.tags.length > 3 && (
-                    <span className="inline-flex items-center rounded-lg bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-500">
-                      +{article.tags.length - 3}
-                    </span>
-                  )}
-                </div>
-              )}
-
-              {/* Meta Info */}
-              <div className="mb-4 space-y-2 border-t-2 border-neutral-100 pt-4">
-                {article.author && (
-                  <div className="flex items-center gap-2 text-xs text-neutral-600">
-                    <svg className="h-4 w-4 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            {/* Clickable Link Wrapper */}
+            <Link
+              href={article.slug ? `/dashboard/articles/${article.slug}` : '#'}
+              className="block"
+            >
+              {/* Featured Image Placeholder */}
+              <div className="h-48 w-full bg-gradient-to-br from-neutral-100 to-neutral-200 relative">
+                {article.featuredImage ? (
+                  <img src={article.featuredImage} alt={article.title} className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                ) : (
+                  <div className="flex h-full items-center justify-center">
+                    <svg className="h-16 w-16 text-neutral-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        strokeWidth={1.5}
+                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                       />
                     </svg>
-                    <span className="font-semibold">{article.author}</span>
                   </div>
                 )}
-                {article.source && (
-                  <div className="flex items-center gap-2 text-xs text-neutral-600">
-                    <svg className="h-4 w-4 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-                      />
-                    </svg>
-                    <span>{article.source}</span>
-                  </div>
-                )}
-                <div className="flex items-center gap-2 text-xs text-neutral-500">
-                  <svg className="h-4 w-4 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <span>
-                    {new Date(article.createdAt).toLocaleDateString('fr-FR', {
-                      day: 'numeric',
-                      month: 'short',
-                      year: 'numeric',
-                    })}
+                {/* Status Badge Overlay */}
+                <div className="absolute right-4 top-4">
+                  {getStatusBadge(article.status)}
+                </div>
+              </div>
+
+              {/* Card Content - Clickable */}
+              <div className="flex flex-1 flex-col p-6 pb-4">
+                {/* Category */}
+                <div className="mb-3 flex items-center gap-2">
+                  <span className="inline-flex items-center rounded-full bg-red-100 px-3 py-1 text-xs font-bold uppercase tracking-wide text-red-700">
+                    {article.category}
                   </span>
                 </div>
-              </div>
 
-              {/* Actions */}
+                {/* Title */}
+                <h3 className="mb-3 line-clamp-2 text-2xl font-samuel uppercase text-neutral-900 transition-colors group-hover:text-red-600">
+                  {article.title}
+                </h3>
+
+                {/* Excerpt */}
+                <p className="mb-4 line-clamp-3 flex-1 text-sm leading-relaxed text-neutral-600">
+                  {article.excerpt}
+                </p>
+
+                {/* Tags */}
+                {article.tags.length > 0 && (
+                  <div className="mb-4 flex flex-wrap gap-2">
+                    {article.tags.slice(0, 3).map((tag) => (
+                      <span
+                        key={tag}
+                        className="inline-flex items-center rounded-lg bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-700"
+                      >
+                        #{tag}
+                      </span>
+                    ))}
+                    {article.tags.length > 3 && (
+                      <span className="inline-flex items-center rounded-lg bg-neutral-100 px-2.5 py-1 text-xs font-medium text-neutral-500">
+                        +{article.tags.length - 3}
+                      </span>
+                    )}
+                  </div>
+                )}
+
+                {/* Meta Info */}
+                <div className="space-y-2 border-t-2 border-neutral-100 pt-4">
+                  {article.author && (
+                    <div className="flex items-center gap-2 text-xs text-neutral-600">
+                      <svg className="h-4 w-4 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                        />
+                      </svg>
+                      <span className="font-semibold">{article.author}</span>
+                    </div>
+                  )}
+                  {article.source && (
+                    <div className="flex items-center gap-2 text-xs text-neutral-600">
+                      <svg className="h-4 w-4 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                        />
+                      </svg>
+                      <span>{article.source}</span>
+                    </div>
+                  )}
+                  <div className="flex items-center gap-2 text-xs text-neutral-500">
+                    <svg className="h-4 w-4 text-neutral-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <span>
+                      {new Date(article.createdAt).toLocaleDateString('fr-FR', {
+                        day: 'numeric',
+                        month: 'short',
+                        year: 'numeric',
+                      })}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+
+            {/* Actions - Separate from clickable area */}
+            <div className="border-t-2 border-neutral-100 px-6 pb-6 pt-4">
               <div className="grid grid-cols-2 gap-2">
                 <button
-                  onClick={() => onEdit(article)}
-                  className="flex items-center justify-center gap-2  bg-neutral-900 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-neutral-800"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    onEdit(article)
+                  }}
+                  className="flex items-center justify-center gap-2 bg-neutral-900 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-neutral-800"
                 >
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path
@@ -255,14 +266,24 @@ const ArticleList: React.FC<ArticleListProps> = ({ articles, onEdit, onDelete })
                 </button>
 
                 {article.status !== 'PUBLIE' ? (
-                  <button className="flex items-center justify-center gap-2  bg-red-600 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-red-700">
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                    }}
+                    className="flex items-center justify-center gap-2 bg-red-600 px-4 py-3 text-sm font-bold text-white transition-all hover:bg-red-700"
+                  >
                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
                     Publier
                   </button>
                 ) : (
-                  <button className="flex items-center justify-center gap-2  border-2 border-neutral-200 bg-white px-4 py-3 text-sm font-bold text-neutral-700 transition-all hover:bg-neutral-50">
+                  <Link
+                    href={article.slug ? `/dashboard/articles/${article.slug}` : '#'}
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex items-center justify-center gap-2 border-2 border-neutral-200 bg-white px-4 py-3 text-sm font-bold text-neutral-700 transition-all hover:bg-neutral-50"
+                  >
                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path
                         strokeLinecap="round"
@@ -278,12 +299,16 @@ const ArticleList: React.FC<ArticleListProps> = ({ articles, onEdit, onDelete })
                       />
                     </svg>
                     Voir
-                  </button>
+                  </Link>
                 )}
 
                 <button
-                  onClick={() => onDelete(article.id)}
-                  className="col-span-2 flex items-center justify-center gap-2  font-black border-2 border-red-200 bg-red-50 px-4 py-3 text-sm  text-red-700 transition-all hover:bg-red-100"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    onDelete(article.id)
+                  }}
+                  className="col-span-2 flex items-center justify-center gap-2 border-2 border-red-200 bg-red-50 px-4 py-3 text-sm font-black text-red-700 transition-all hover:bg-red-100"
                 >
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path

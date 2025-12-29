@@ -3,6 +3,7 @@
 import Logo from '@/shared/Logo'
 import clsx from 'clsx'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { FC, useState, useRef, useEffect } from 'react'
 import AvatarDropdown from './AvatarDropdown'
 import { XMarkIcon, Bars3Icon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
@@ -12,6 +13,7 @@ interface HeaderGNewsProps {
 }
 
 const HeaderGNews: FC<HeaderGNewsProps> = ({ className }) => {
+  const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
@@ -168,16 +170,25 @@ const HeaderGNews: FC<HeaderGNewsProps> = ({ className }) => {
 
               {/* Desktop Navigation - Enhanced */}
               <nav className="hidden lg:flex items-center ">
-                {categoryLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="relative px-5 py-2.5 text-[0.9rem] text-white font-bold hover:text-black transition-all uppercase  group overflow-hidden"
-                  >
-                    <span className="relative z-10">{link.name}</span>
-                    <span className="absolute inset-0 bg-gradient-to-r from-red-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </Link>
-                ))}
+                {categoryLinks.map((link) => {
+                  const isActive = pathname === link.href
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={clsx(
+                        "relative px-5 py-2.5 text-[0.9rem] font-bold transition-all uppercase group overflow-hidden",
+                        isActive ? "text-black" : "text-white hover:text-black"
+                      )}
+                    >
+                      <span className="relative z-10">{link.name}</span>
+                      <span className={clsx(
+                        "absolute inset-0 bg-gradient-to-r from-red-600 to-orange-600 transition-opacity duration-300",
+                        isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                      )} />
+                    </Link>
+                  )
+                })}
               </nav>
 
               {/* Mobile Menu Button */}
@@ -304,26 +315,37 @@ const HeaderGNews: FC<HeaderGNewsProps> = ({ className }) => {
             {/* Navigation */}
             <nav className="p-6">
               <div className="space-y-1">
-                {categoryLinks.map((link, index) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="group relative block px-5 py-4 text-base font-black text-neutral-300 hover:text-white hover:bg-gradient-to-r hover:from-red-600 hover:to-orange-600 transition-all uppercase tracking-[0.1em] border-l-4 border-transparent hover:border-white overflow-hidden"
-                  >
-                    <span className="flex items-center justify-between relative z-10">
-                      {link.name}
-                      <svg
-                        className="w-5 h-5 text-neutral-600 group-hover:text-white transition-all group-hover:translate-x-1"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </span>
-                  </Link>
-                ))}
+                {categoryLinks.map((link, index) => {
+                  const isActive = pathname === link.href
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={clsx(
+                        "group relative block px-5 py-4 text-base font-black transition-all uppercase tracking-[0.1em] border-l-4 overflow-hidden",
+                        isActive
+                          ? "text-white bg-gradient-to-r from-red-600 to-orange-600 border-white"
+                          : "text-neutral-300 hover:text-white hover:bg-gradient-to-r hover:from-red-600 hover:to-orange-600 border-transparent hover:border-white"
+                      )}
+                    >
+                      <span className="flex items-center justify-between relative z-10">
+                        {link.name}
+                        <svg
+                          className={clsx(
+                            "w-5 h-5 transition-all group-hover:translate-x-1",
+                            isActive ? "text-white" : "text-neutral-600 group-hover:text-white"
+                          )}
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </span>
+                    </Link>
+                  )
+                })}
               </div>
 
               {/* GAMIUS CTA */}
