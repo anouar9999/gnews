@@ -53,7 +53,7 @@ const ArticleViewPage: React.FC = () => {
     excerpt: 'Découvrez les nouvelles spécifications de la PS5 Pro',
     category: 'Hardware',
     tags: ['PlayStation', 'PS5', 'Sony', 'Console'],
-    status: 'BROUILLON_IA' as const,
+    status: ('BROUILLON_IA' as const) as 'NOUVEAU' | 'BROUILLON_IA' | 'EN_REVISION' | 'PUBLIE',
     priority: 'high' as const,
     author: 'IA Generator',
     source: 'GameSpot',
